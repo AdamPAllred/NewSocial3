@@ -12,7 +12,7 @@
       </div>
     </div>
     <PostList :posts="filteredPosts" />
-    <p><a href="https://github.com/AdamPAllred/socialMedia">GitHub Link!</a></p>
+    <p><a href="https://github.com/AdamPAllred/NewSocial">GitHub Link!</a></p>
   </div>
 </template>
 
