@@ -59,7 +59,7 @@ export default {
         this.following = user.following;
         return true;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
     async getPosts() {
@@ -68,7 +68,7 @@ export default {
         this.posts = response.data;
         return true;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
   }

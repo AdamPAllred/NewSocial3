@@ -9,8 +9,12 @@
       </div>
       <div v-if="this.editingPage">
         <div class="info">
-          <input v-model="bio" placeholder="Bio">
+          <div>
+          <textarea v-model="bio" placeholder="Bio"></textarea>
+          </div>
+          <div>
           <button @click="editBio(bio)">Edit Bio</button>
+          </div>
         </div>
       </div>
     <PostList :posts="filterPosts" />
@@ -57,7 +61,7 @@ export default {
         this.posts = response.data;
         return true;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
     async getBio() {
@@ -72,7 +76,7 @@ export default {
         document.getElementById("bio").innerHTML = results;
         return true;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
     async editBio(bio) {
@@ -88,7 +92,7 @@ export default {
           document.getElementById("bio").innerHTML = results;
           return true;
         } catch (error) {
-          console.log(error);
+          //console.log(error);
         }
     },
     editPage() {
@@ -129,6 +133,8 @@ p {
 .header {
   font-size: 20px;
 }
+
+
 
 
 .wrapper {

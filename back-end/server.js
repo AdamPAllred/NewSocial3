@@ -133,9 +133,10 @@ app.delete('/api/posts/:id', async (req, res) => {
 
 app.put('/api/users/:id', async (req, res) => {
   try {
+    var userName = "Beth123";
     if(req.body.follow == "bio") {
       var user = await User.findOne({
-        _id: req.params.id,
+        user: userName,
       });
       user.bio = req.body.bio;
       user.save();
@@ -144,7 +145,7 @@ app.put('/api/users/:id', async (req, res) => {
     else {
       if(req.body.follow == true) {
         var user = await User.findOne({
-          _id: req.params.id,
+          user: userName,
         });
         user.following.push(req.body.userName);
         user.save();
@@ -152,7 +153,7 @@ app.put('/api/users/:id', async (req, res) => {
       }
       else {
         var user = await User.findOne({
-          _id: req.params.id,
+          user: userName,
         });
         for(var i = 0; i < user.following.length; i++) {
           if(user.following[i] == req.body.userName) {
@@ -160,9 +161,9 @@ app.put('/api/users/:id', async (req, res) => {
             break;
           }
         }
+        user.save();
+        res.sendStatus(200);
       }
-      user.save();
-      res.sendStatus(200);
     }
   } catch (error) {
     console.log(error);
@@ -173,8 +174,9 @@ app.put('/api/users/:id', async (req, res) => {
 
 app.get('/api/users/:id', async (req, res) => {
   try {
+    var userName = "Beth123";
     var user = await User.findOne({
-      _id: req.params.id,
+      user: userName,
     });
     res.send(user);
   } catch (error) {

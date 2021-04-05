@@ -79,7 +79,7 @@ export default {
         this.getFollowing();
         return true;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
     async follow(post) {
@@ -91,7 +91,7 @@ export default {
         this.getFollowing();
         return true;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
     async getFollowing() {
@@ -99,10 +99,9 @@ export default {
         let response = await axios.get("/api/users/6065fb95a7c2de476c9274b0");
         let user = response.data;
         this.following = user.following;
-        console.log(this.following);
         return true;
       } catch (error) {
-        console.log(error);
+      //console.log(error);
       }
     },
     notFollowing(userName) {
@@ -126,7 +125,7 @@ export default {
         await axios.delete("/api/posts/" + post._id);
         return true;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
     async liked(post) {
@@ -145,7 +144,7 @@ export default {
         }
         return true;
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     },
   }

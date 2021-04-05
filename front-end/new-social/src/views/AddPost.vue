@@ -18,12 +18,16 @@
         <p></p>
         <button @click="post">Post</button>
       </div>
-      <div  v-if="addPost
+      <div  v-if="addPost">
         <p> Successfully Posted!!! </p>
       </div>
     </div>
-    <input v-model="user" placeholder="newUser">
-    <button @click="addUser">newUser</button>
+    <div class="addPost">
+      <h1> <strong> Add a User </strong></h1>
+      <input v-model="user" placeholder="newUser">
+      <p></p>
+      <button @click="addUser">newUser</button>
+    </div>
   </div>
 </template>
 
@@ -55,7 +59,6 @@ import axios from 'axios';
         try {
           const formData = new FormData();
           formData.append('photo', this.file, this.file.name);
-          console.log(this.file);
           let r1 = await axios.post('/api/photos', formData);
           let r2 = await axios.post('/api/posts', {
             userName: this.userName,
@@ -68,7 +71,7 @@ import axios from 'axios';
           });
           this.addPost = r2.data;
         } catch (error) {
-          console.log(error);
+          //console.log(error);
         }
       },
       async addUser() {
@@ -79,7 +82,7 @@ import axios from 'axios';
             bio: "No Bio Currently, Edit to add ONE!!!",
           });
         } catch (error) {
-          console.log(error);
+          //console.log(error);
         }
       },
     }
