@@ -4,8 +4,7 @@
 
     <div >
       <div class="addPost">
-        <input v-model="userName" placeholder="UserName">
-        <p></p>
+
         <input v-model="country" placeholder="country">
         <p></p>
         <input type="file" name="photo" @change="fileChanged">
@@ -22,12 +21,6 @@
         <p> Successfully Posted!!! </p>
       </div>
     </div>
-    <div class="addPost">
-      <h1> <strong> Add a User </strong></h1>
-      <input v-model="user" placeholder="newUser">
-      <p></p>
-      <button @click="addUser">newUser</button>
-    </div>
   </div>
 </template>
 
@@ -38,7 +31,6 @@ import axios from 'axios';
     name: 'AddPost',
     data() {
       return {
-        userName: "",
         country: "",
         tags: "",
         description: "",
@@ -61,7 +53,7 @@ import axios from 'axios';
           formData.append('photo', this.file, this.file.name);
           let r1 = await axios.post('/api/photos', formData);
           let r2 = await axios.post('/api/posts', {
-            userName: this.userName,
+            userName: this.$root.$data.user.username,
             country: this.country,
             tags: this.tags,
             color: this.color,
@@ -70,17 +62,6 @@ import axios from 'axios';
             heart: "noColorHeart.png",
           });
           this.addPost = r2.data;
-        } catch (error) {
-          //console.log(error);
-        }
-      },
-      async addUser() {
-        try {
-          await axios.post('/api/users', {
-            user: this.user,
-            following: [],
-            bio: "No Bio Currently, Edit to add ONE!!!",
-          });
         } catch (error) {
           //console.log(error);
         }
@@ -111,6 +92,7 @@ p {
   margin-right: 15%;
   margin-left: 15%;
   font-size:20px;
+  padding-bottom: 90px;
 }
 
 </style>

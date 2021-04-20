@@ -72,7 +72,7 @@ export default {
   methods: {
     async unFollow(post) {
       try {
-        await axios.put("/api/users/6065fb95a7c2de476c9274b0", {
+        await axios.put("/api/users/" + this.$root.$data.user._id, {
           userName: post.userName,
           follow: false,
         });
@@ -84,7 +84,7 @@ export default {
     },
     async follow(post) {
       try {
-        await axios.put("/api/users/6065fb95a7c2de476c9274b0", {
+        await axios.put("/api/users/" + this.$root.$data.user._id, {
           userName: post.userName,
           follow: true,
         });
@@ -96,7 +96,7 @@ export default {
     },
     async getFollowing() {
       try {
-        let response = await axios.get("/api/users/6065fb95a7c2de476c9274b0");
+        let response = await axios.get("/api/users/" + this.$root.$data.user._id);
         let user = response.data;
         this.following = user.following;
         return true;

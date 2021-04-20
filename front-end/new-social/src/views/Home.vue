@@ -12,7 +12,6 @@
       </div>
     </div>
     <PostList :posts="filteredPosts" />
-    <p><a href="https://github.com/AdamPAllred/NewSocial">GitHub Link!</a></p>
   </div>
 </template>
 

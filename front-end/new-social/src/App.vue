@@ -1,5 +1,6 @@
 <template>
 <div class="overall">
+  <div v-if="user">
   <div class="menu">
     <div class="link" v-on:click="updateBold(0)">
       <router-link style="text-decoration: none;" to="/">
@@ -43,13 +44,38 @@
     </div>
   </div>
   <router-view />
+  </div>
+  <Login v-else/>
+  <p><a href="https://github.com/AdamPAllred/NewSocial">GitHub Link! I spent 6 hours!</a></p>
+
+
+
+
 </div>
 </template>
 
 
 <script>
+import Login from '@/components/Login.vue';
+import axios from 'axios';
 export default {
   name: 'App',
+  components: {
+    Login,
+  },
+  async created() {
+    try {
+      let response = await axios.get('/api/users');
+      this.$root.$data.user = response.data.user;
+    } catch (error) {
+      this.$root.$data.user = null;
+    }
+  },
+  computed: {
+    user() {
+      return this.$root.$data.user;
+    }
+  },
   methods: {
     bold(index) {
       if(this.$root.$data.bold == index) {
@@ -67,6 +93,10 @@ export default {
 </script>
 
 <style>
+
+p {
+  text-align: center;
+}
 
 .overall {
   background-color: #cfe0e8;

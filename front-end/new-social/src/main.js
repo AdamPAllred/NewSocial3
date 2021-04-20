@@ -7,6 +7,7 @@ Vue.config.productionTip = false;
 let data = {
   following: [],
   bold: 0,
+  user: null,
 }
 
 new Vue({

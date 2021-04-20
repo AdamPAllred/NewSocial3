@@ -1,6 +1,13 @@
 <template>
   <div>
-    <h1> Beth123's Page</h1>
+    <div class="logout">
+      <div class="logout-item">
+    <h1> {{this.$root.$data.user.username}}'s Page</h1>
+      </div>
+      <div class="lougout-item">
+    <h2><button @click="logout"> Logout! </button></h2>
+      </div>
+    </div>
     <div class="info">
       <button @click="editPage">Edit Page</button>
     </div>
@@ -47,7 +54,7 @@ export default {
       var addPost = [];
       var currPosts = this.posts;
       for(var i = 0; i < currPosts.length; i++) {
-        if(currPosts[i].userName == "Beth123") {
+        if(currPosts[i].userName == this.$root.$data.user.username) {
           addPost.push(currPosts[i]);
         }
       }
@@ -66,7 +73,7 @@ export default {
     },
     async getBio() {
       try {
-        let response = await axios.get("api/users/6065fb95a7c2de476c9274b0");
+        let response = await axios.get("api/users/" + this.$root.$data.user._id);
         this.user = response.data;
         this.bio = this.user.bio;
         let results = "";
@@ -81,7 +88,7 @@ export default {
     },
     async editBio(bio) {
         try {
-          await axios.put("/api/users/6065fb95a7c2de476c9274b0", {
+          await axios.put("/api/users/" + this.$root.$data.user._id, {
             bio: this.bio,
             follow: "bio",
           });
@@ -103,6 +110,14 @@ export default {
         this.editingPage = true;
       }
     },
+    async logout() {
+      try {
+        await axios.delete("/api/users");
+        this.$root.$data.user = null;
+      } catch (error) {
+        this.$root.$data.user = null;
+      }
+    },
   }
 }
 </script>
@@ -122,8 +137,21 @@ h1 {
   margin-bottom: 30px;
 }
 
+.logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-item {
+
+  padding-left: 10px;
+  padding-right:10px;
+  display: flex;
+}
+
 .button {
-  font-size: 25px;
+  font-size: 50px;
 }
 
 p {

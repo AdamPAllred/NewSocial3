@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     filterPosts() {
-    this.getFollowing();
+      this.getFollowing();
       var addPost = [];
       var currPost = this.posts;
       for(var i = 0; i < currPost.length; i++) {
@@ -54,7 +54,7 @@ export default {
     },
     async getFollowing() {
       try {
-        let response = await axios.get("/api/users/6065fb95a7c2de476c9274b0");
+        let response = await axios.get("/api/users/" + this.$root.$data.user._id);
         var user = response.data;
         this.following = user.following;
         return true;
@@ -68,7 +68,7 @@ export default {
         this.posts = response.data;
         return true;
       } catch (error) {
-        //console.log(error);
+        console.log(error);
       }
     },
   }
